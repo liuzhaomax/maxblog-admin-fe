@@ -2,12 +2,11 @@ import React from "react"
 import "./SideMenu.css"
 import { Layout } from "antd"
 import Menu from "antd/lib/menu"
-import { AreaChartOutlined, ExperimentOutlined, HomeOutlined, ProjectOutlined, ReadOutlined } from "@ant-design/icons"
 import { useNavigate } from "react-router-dom"
 import { ARTICLE, DEMO, HOME, MAXBLOG, PROJECT, STATS } from "../config/module"
+import { SIDER_MENU_ITEMS } from "../config/menu"
 
 const { Sider } = Layout
-const { SubMenu } = Menu
 
 function SideMenu(props) {
     const navigate = useNavigate()
@@ -77,20 +76,9 @@ function SideMenu(props) {
                 defaultSelectedKeys={getSelectedKey(MAXBLOG.MODULE_MAXBLOG)}
                 defaultOpenKeys={getOpenKey(MAXBLOG.MODULE_MAXBLOG)}
                 style={{ height: "100%", borderRight: 0 }}
-            >
-                <Menu.Item key={ STATS.KEY } icon={<AreaChartOutlined />} onClick={ jump }>{ STATS.NAME }</Menu.Item>
-                <Menu.Item key={ HOME.KEY } icon={<HomeOutlined />} onClick={ jump }>{ HOME.NAME }</Menu.Item>
-                <SubMenu key={ ARTICLE.KEY } icon={<ReadOutlined />} title={ ARTICLE.NAME }>
-                    <Menu.Item key={ ARTICLE.FUNCTIONS.ARTICLE_LIST.KEY } onClick={ jump }>{ARTICLE.FUNCTIONS.ARTICLE_LIST.NAME}</Menu.Item>
-                    <Menu.Item key={ ARTICLE.FUNCTIONS.ARTICLE_TAGS.KEY } onClick={ jump }>{ARTICLE.FUNCTIONS.ARTICLE_TAGS.NAME}</Menu.Item>
-                </SubMenu>
-                <SubMenu key={ DEMO.KEY } icon={<ExperimentOutlined />} title={ DEMO.NAME }>
-                    <Menu.Item key={ DEMO.FUNCTIONS.DEMO_LIST.KEY } onClick={ jump }>{DEMO.FUNCTIONS.DEMO_LIST.NAME}</Menu.Item>
-                </SubMenu>
-                <SubMenu key={ PROJECT.KEY } icon={<ProjectOutlined />} title={ PROJECT.NAME }>
-                    <Menu.Item key={ PROJECT.FUNCTIONS.PROJECT_LIST.KEY } onClick={ jump }>{PROJECT.FUNCTIONS.PROJECT_LIST.NAME}</Menu.Item>
-                </SubMenu>
-            </Menu>
+                onClick={jump}
+                items={SIDER_MENU_ITEMS}
+            />
         </Sider>
     )
 }

@@ -9,6 +9,7 @@ import { deleteLogout } from "./handlers"
 import { LOGIN, MAXBLOG } from "../config/module"
 import { useDispatch } from "react-redux"
 import { setToken, toggleAuth } from "../state/reducers/auth"
+import { MENU_ITEMS_WITHOUT_SUB } from "../config/menu"
 
 const { Header } = Layout
 
@@ -39,9 +40,11 @@ function Nav() {
     return (
         <Header className="header">
             <div className="logo"/>
-            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={MAXBLOG.KEY}>
-                <Menu.Item className="nav" key={ MAXBLOG.KEY }>{ MAXBLOG.NAME }</Menu.Item>
-                {/*<Menu.Item className="nav" key="2">Website 2</Menu.Item>*/}
+            <Menu
+                theme="dark"
+                mode="horizontal"
+                defaultSelectedKeys={MAXBLOG.KEY}
+                items={MENU_ITEMS_WITHOUT_SUB}>
             </Menu>
             <div className="profile">
                 <UserOutlined className="profile-icon"/>

@@ -34,15 +34,17 @@ function CenterContent() {
         let names = getPath(modules)
         names = [website.NAME, ...names]
         let items = names.map((name, index) => {
-            return <Breadcrumb.Item key={"breadcrumb" + name}>{ names[index] }</Breadcrumb.Item>
+            return { title: names[index] }
         })
         setBreadcrumbItems(items)
     }
 
     return (
         <Layout style={{ padding: "0 24px 24px" }}>
-            <Breadcrumb id="breadcrumb" style={{ margin: "16px 0" }} >
-                { breadcrumbItems }
+            <Breadcrumb
+                id="breadcrumb"
+                style={{ margin: "16px 0" }}
+                items={breadcrumbItems}>
             </Breadcrumb>
             <Content className="content">
                 <Outlet />
