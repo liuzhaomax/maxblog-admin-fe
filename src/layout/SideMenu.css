@@ -18,3 +18,13 @@
 .sider .ant-menu-item-selected {
     background-color: rgba(51, 142, 108, 0.2) !important;
 }
+
+.sider .ant-menu-item {
+    width: 100% !important;
+}
+
+.sider .ant-menu-submenu-title {
+    margin: 0 !important;
+    width: 100% !important;
+}
+

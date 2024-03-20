@@ -7,8 +7,6 @@ function Index() {
     const auth = useSelector(state => state.auth)
     return (
         <React.Fragment>
-            {/*TODO 测试用*/}
-            {/*<Navigate to={STATS.FULL_PATH} replace/>*/}
             {
                 auth.isAuthenticated ?
                     <Navigate to={STATS.FULL_PATH} replace/> :
