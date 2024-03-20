@@ -44,8 +44,8 @@ function Nav() {
                 theme="dark"
                 mode="horizontal"
                 defaultSelectedKeys={MAXBLOG.KEY}
-                items={MENU_ITEMS_WITHOUT_SUB}>
-            </Menu>
+                items={MENU_ITEMS_WITHOUT_SUB}
+            />
             <div className="profile">
                 <UserOutlined className="profile-icon"/>
             </div>
