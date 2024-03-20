@@ -1,4 +1,5 @@
-.MainLayout {
-    overflow-y: hidden;
-    width: 100%;
+.Layout {
+    height: 100%;
 }
+
+

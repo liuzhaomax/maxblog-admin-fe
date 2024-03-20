@@ -1,8 +1,9 @@
 export const URL = {
     INNER: {
-        Demo: "/demo",
+        Login: "/login",
+        Logout: "/logout",
     },
     OUTER: {
-        Contributors: "https://api.github.com/repos/liuzhaomax/go-maxms-fe/contributors",
+        Contributors: "https://api.github.com/repos/liuzhaomax/maxblog-fe-admin/contributors",
     },
 }

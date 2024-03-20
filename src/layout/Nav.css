@@ -1,0 +1,44 @@
+.header {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.nav, .logout {
+    font-size: 1.7rem;
+}
+
+.logo {
+    margin-right: 37px;
+    margin-left: 10px;
+    background: url(../assets/logo.svg);
+    height: 43px;
+    width: 133px;
+}
+
+.profile {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 10px;
+    margin-left : auto;
+}
+
+.profile svg {
+    width: 40px;
+    height: 40px;
+    color: rgba(255, 255, 255, 1);
+}
+
+.logout{
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+
+.profile:hover, .logout:hover, .ant-menu-item-selected:hover {
+    background-color: #338e6c;
+    color: white;
+}

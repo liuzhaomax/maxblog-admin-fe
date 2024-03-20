@@ -11,3 +11,9 @@ export const remove = (array, target) => {
     }
     return array
 }
+
+export const flatten = arr => {
+    return arr.reduce((pre, cur) => {
+        return pre.concat(Array.isArray(cur) ? flatten(cur) : cur)
+    }, [])
+}

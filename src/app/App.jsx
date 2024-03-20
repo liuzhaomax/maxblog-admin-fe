@@ -1,15 +1,22 @@
 import React from "react"
 import "./App.css"
-import {ConfigProvider} from "antd"
 import {BrowserRouter as Router} from "react-router-dom"
 import routes from "./routes"
+import { useDispatch } from "react-redux"
+import { toggleAuth, setToken } from "../state/reducers/auth"
 
-const App = () => (
-    <div id="App" className="App">
-        <ConfigProvider theme={{ token: { colorPrimary: "#338e6c" } }}>
+function App() {
+    const dispatch = useDispatch()
+    let token = localStorage.getItem("TOKEN")
+    if (token) {
+        dispatch(toggleAuth())
+        dispatch(setToken(token))
+    }
+    return (
+        <div id="App" className="App">
             <Router>{ routes }</Router>
-        </ConfigProvider>
-    </div>
-)
+        </div>
+    )
+}
 
 export default App
