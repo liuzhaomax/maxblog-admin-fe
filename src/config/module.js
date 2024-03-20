@@ -3,7 +3,7 @@ export const LOGIN = {
     KEY: "Login",
     PATH: "login",
     FULL_PATH: "/login",
-    FILE_PATH: "pages/login/Login",
+    FILE_PATH: "page/login/Login",
 }
 
 export const STATS = {
@@ -11,7 +11,7 @@ export const STATS = {
     KEY: "STATS",
     PATH: "stats",
     FULL_PATH: "/maxblog/stats",
-    FILE_PATH: "pages/maxblog/stats/Stats",
+    FILE_PATH: "page/maxblog/stats/Stats",
 }
 
 export const HOME = {
@@ -19,7 +19,7 @@ export const HOME = {
     KEY: "HOME",
     PATH: "home",
     FULL_PATH: "/maxblog/home",
-    FILE_PATH: "pages/maxblog/home/Home",
+    FILE_PATH: "page/maxblog/home/Home",
 }
 
 export const ARTICLE = {
@@ -33,14 +33,14 @@ export const ARTICLE = {
             KEY: "ARTICLE_LIST",
             PATH: "articleList",
             FULL_PATH: "/maxblog/article/articleList",
-            FILE_PATH: "pages/maxblog/article/ArticleList",
+            FILE_PATH: "page/maxblog/article/ArticleList",
         },
         ARTICLE_TAGS: {
             NAME: "标签",
             KEY: "ARTICLE_TAGS",
             PATH: "articleTags",
             FULL_PATH: "/maxblog/article/articleTags",
-            FILE_PATH: "pages/maxblog/article/ArticleTags",
+            FILE_PATH: "page/maxblog/article/ArticleTags",
         },
     },
 }
@@ -56,7 +56,7 @@ export const DEMO = {
             KEY: "DEMO_LIST",
             PATH: "demoList",
             FULL_PATH: "/maxblog/demo/demoList",
-            FILE_PATH: "pages/maxblog/demo/DemoList",
+            FILE_PATH: "page/maxblog/demo/DemoList",
         },
     },
 }
@@ -72,7 +72,7 @@ export const PROJECT = {
             KEY: "PROJECT_LIST",
             PATH: "projectList",
             FULL_PATH: "/maxblog/project/projectList",
-            FILE_PATH: "pages/maxblog/project/ProjectList",
+            FILE_PATH: "page/maxblog/project/ProjectList",
         },
     },
 }

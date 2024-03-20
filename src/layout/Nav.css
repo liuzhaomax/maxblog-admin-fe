@@ -42,3 +42,7 @@
     background-color: #338e6c;
     color: white;
 }
+
+.header .ant-menu-item-selected {
+    background-color: #338e6c !important;
+}

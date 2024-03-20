@@ -4,6 +4,7 @@ import {BrowserRouter as Router} from "react-router-dom"
 import routes from "./routes"
 import { useDispatch } from "react-redux"
 import { toggleAuth, setToken } from "../state/reducers/auth"
+import { ConfigProvider } from "antd"
 
 function App() {
     const dispatch = useDispatch()
@@ -14,7 +15,9 @@ function App() {
     }
     return (
         <div id="App" className="App">
-            <Router>{ routes }</Router>
+            <ConfigProvider theme={{ token: { colorPrimary: "#338e6c" } }}>
+                <Router>{ routes }</Router>
+            </ConfigProvider>
         </div>
     )
 }

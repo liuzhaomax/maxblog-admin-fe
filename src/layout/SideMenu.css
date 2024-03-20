@@ -5,3 +5,16 @@
 .sider li {
     margin: 0 !important;
 }
+
+.sider .ant-menu-item-selected,
+.sider .ant-menu-submenu-selected >.ant-menu-submenu-title {
+    color: #338e6c !important;
+}
+
+.sider .ant-menu-item-active {
+    background-color: rgba(39, 40, 35, 0.1) !important;
+}
+
+.sider .ant-menu-item-selected {
+    background-color: rgba(51, 142, 108, 0.2) !important;
+}
