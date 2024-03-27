@@ -6,9 +6,5 @@ export const getPuk = () => {
 }
 
 export const postLogin = data => {
-    let credential = false
-    if (process.env.NODE_ENV === "production") {
-        credential = true
-    }
-    return axios.post(URL.INNER.Login, data, {withCredentials: credential})
+    return axios.post(URL.INNER.Login, data, {withCredentials: true})
 }

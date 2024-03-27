@@ -17,6 +17,8 @@ function Nav() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
+    const [messageApi, contextHolderMessage] = message.useMessage()
+
     const logout = () => {
         deleteLogout()
             .then(() => {
@@ -24,7 +26,7 @@ function Nav() {
                 dispatch(setToken(""))
                 setAuthToken()
                 localStorage.removeItem("TOKEN")
-                message.success("登出成功")
+                messageApi.success("登出成功")
                 navigate(LOGIN.FULL_PATH)
             })
             .catch(() => {
@@ -32,7 +34,7 @@ function Nav() {
                 dispatch(setToken(""))
                 setAuthToken()
                 localStorage.removeItem("TOKEN")
-                message.error("登出失败")
+                messageApi.error("登出失败")
                 navigate(LOGIN.FULL_PATH)
             })
     }
@@ -50,6 +52,7 @@ function Nav() {
                 <UserOutlined className="profile-icon"/>
             </div>
             <div className="logout" onClick={logout}>登出</div>
+            {contextHolderMessage}
         </Header>
     )
 }
