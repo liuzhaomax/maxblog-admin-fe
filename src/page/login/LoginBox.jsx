@@ -13,16 +13,17 @@ import { setToken, toggleAuth } from "../../state/reducers/auth"
 function LoginBox() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [mobile, setMobile] = useState("")
+    const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [isLoading, setIsLoading] = useState(false)
 
     const encrypt = () => {
         let rsa = new JsEncrypt()
-        rsa.setPublicKey(sessionStorage.getItem("puk"))
+        let publicKey = atob(sessionStorage.getItem("puk"))
+        rsa.setPublicKey(publicKey)
         return {
-            "mobile": rsa.encrypt(mobile),
-            "password": rsa.encrypt(password)
+            "username": rsa.encrypt(username),
+            "password": rsa.encrypt(password),
         }
     }
 
@@ -50,7 +51,7 @@ function LoginBox() {
     }
 
     const onMobileChange = e => {
-        setMobile(e.target.value)
+        setUsername(e.target.value)
     }
 
     const onPasswordChange = e => {
@@ -70,9 +71,9 @@ function LoginBox() {
                 </div>
                 <Input
                     id="login-user-name"
-                    name="mobile"
+                    name="username"
                     placeholder="请输入用户名"
-                    value={ mobile }
+                    value={ username }
                     onPressEnter={ submit }
                     onChange={ onMobileChange }
                 />
