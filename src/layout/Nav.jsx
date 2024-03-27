@@ -20,7 +20,7 @@ function Nav() {
     const [messageApi, contextHolderMessage] = message.useMessage()
 
     const logout = () => {
-        deleteLogout()
+        deleteLogin()
             .then(() => {
                 dispatch(toggleAuth())
                 dispatch(setToken(""))
