@@ -19,23 +19,23 @@ function Nav() {
 
     const [messageApi, contextHolderMessage] = message.useMessage()
 
+    const cleanLoginInfo = () => {
+        dispatch(toggleAuth())
+        dispatch(setToken(""))
+        setAuthToken()
+        localStorage.removeItem("TOKEN")
+    }
+
     const logout = () => {
         deleteLogin()
             .then(() => {
-                dispatch(toggleAuth())
-                dispatch(setToken(""))
-                setAuthToken()
-                localStorage.removeItem("TOKEN")
+                cleanLoginInfo()
                 messageApi.success("登出成功")
                 navigate(LOGIN.FULL_PATH)
             })
             .catch(() => {
-                dispatch(toggleAuth())
-                dispatch(setToken(""))
-                setAuthToken()
-                localStorage.removeItem("TOKEN")
+                cleanLoginInfo()
                 messageApi.error("登出失败")
-                navigate(LOGIN.FULL_PATH)
             })
     }
 
