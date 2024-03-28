@@ -44,9 +44,10 @@ function LoginBox() {
             .then(res => {
                 setIsLoading(false)
                 dispatch(toggleAuth())
-                dispatch(setToken(res.data.data))
+                dispatch(setToken(res.data.data.token))
                 setAuthToken(res.data.data)
-                localStorage.setItem("TOKEN", res.data.data)
+                localStorage.setItem("MAXBLOG_TOKEN", res.data.data.token)
+                localStorage.setItem("MAXBLOG_USER_ID", res.data.data.userId)
                 messageApi.success("登录成功")
                 navigate(STATS.FULL_PATH)
             })

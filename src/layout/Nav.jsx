@@ -23,7 +23,8 @@ function Nav() {
         dispatch(toggleAuth())
         dispatch(setToken(""))
         setAuthToken()
-        localStorage.removeItem("TOKEN")
+        localStorage.removeItem("MAXBLOG_TOKEN")
+        localStorage.removeItem("MAXBLOG_USER_ID")
     }
 
     const logout = () => {
@@ -36,6 +37,7 @@ function Nav() {
             .catch(() => {
                 cleanLoginInfo()
                 messageApi.error("登出失败")
+                navigate(LOGIN.FULL_PATH)
             })
     }
 
