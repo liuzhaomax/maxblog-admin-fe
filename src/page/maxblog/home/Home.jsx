@@ -15,22 +15,28 @@ function Home() {
     const [data, setData] = useState(null)
 
     useEffect(() => {
+        fetchPageData()
+    }, [])
+    const fetchPageData = () => {
         getPageData(HOME.FULL_PATH)
             .then(res => {
                 setData(res.data.data)
             })
             .catch(() => {
-                dispatch(toggleAuth())
-                dispatch(setToken(""))
-                setAuthToken()
-                localStorage.removeItem("MAXBLOG_TOKEN")
-                localStorage.removeItem("MAXBLOG_USER_ID")
+                cleanLogin()
                 openNotification()
                 setTimeout(() => {
                     navigate(LOGIN.FULL_PATH)
                 }, 3000)
             })
-    }, [])
+    }
+    const cleanLogin = () => {
+        dispatch(toggleAuth())
+        dispatch(setToken(""))
+        setAuthToken()
+        localStorage.removeItem("MAXBLOG_TOKEN")
+        localStorage.removeItem("MAXBLOG_USER_ID")
+    }
     const [notificationApi, contextHolderNotification] = notification.useNotification()
     const openNotification = () => {
         notificationApi.info({
