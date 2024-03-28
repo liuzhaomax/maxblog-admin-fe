@@ -35,9 +35,9 @@ function Nav() {
                 navigate(LOGIN.FULL_PATH)
             })
             .catch(() => {
-                cleanLoginInfo()
+                // cleanLoginInfo()
                 messageApi.error("登出失败")
-                navigate(LOGIN.FULL_PATH)
+                // navigate(LOGIN.FULL_PATH)
             })
     }
 

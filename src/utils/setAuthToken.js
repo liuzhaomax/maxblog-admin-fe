@@ -1,10 +1,10 @@
 import axios from "axios"
 
-const setAuthToken = tokenRes => {
-    if (tokenRes) {
+const setAuthToken = tokenData => {
+    if (tokenData) {
         axios.defaults.withCredentials = true
-        axios.defaults.headers.common["Authorization"] = tokenRes.token
-        axios.defaults.headers.common["User_id"] = tokenRes.userId
+        axios.defaults.headers.common["Authorization"] = tokenData.token
+        axios.defaults.headers.common["User_id"] = tokenData.userId
     } else {
         axios.defaults.withCredentials = false
         delete axios.defaults.headers.common["Authorization"]

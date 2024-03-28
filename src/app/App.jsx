@@ -8,7 +8,7 @@ import { ConfigProvider } from "antd"
 
 function App() {
     const dispatch = useDispatch()
-    let token = localStorage.getItem("TOKEN")
+    let token = localStorage.getItem("MAXBLOG_TOKEN")
     if (token) {
         dispatch(toggleAuth())
         dispatch(setToken(token))

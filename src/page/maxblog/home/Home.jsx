@@ -23,19 +23,28 @@ function Home() {
                 dispatch(toggleAuth())
                 dispatch(setToken(""))
                 setAuthToken()
-                localStorage.removeItem("TOKEN")
-                notification.open({
-                    message: "需要登录",
-                    description: "验证失败，请重新登录",
-                    icon: <FrownOutlined style={{ color: "#ff4d4f" }} />,
-                })
-                navigate(LOGIN.FULL_PATH)
+                localStorage.removeItem("MAXBLOG_TOKEN")
+                localStorage.removeItem("MAXBLOG_USER_ID")
+                openNotification()
+                setTimeout(() => {
+                    navigate(LOGIN.FULL_PATH)
+                }, 3000)
             })
     }, [])
+    const [notificationApi, contextHolderNotification] = notification.useNotification()
+    const openNotification = () => {
+        notificationApi.info({
+            message: "登录状态验证失败，请重新登录",
+            description: "页面将于3秒后跳转",
+            icon: (<FrownOutlined style={{ color: "#ff4d4f" }} />),
+            placement: "topRight",
+        })
+    }
 
     return (
         <div id={HOME.KEY} className={HOME.KEY}>
             I am Home {data ? data.msg : "loading"}
+            {contextHolderNotification}
         </div>
     )
 }

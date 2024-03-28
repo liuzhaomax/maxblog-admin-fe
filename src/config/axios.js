@@ -7,9 +7,11 @@ const initAxios = () => {
     axios.defaults.headers.common["Content-Type"] = "application/json"
     axios.defaults.headers.common["Request_id"] = short().new()
     axios.defaults.headers.common["App_id"] = short().new()
-    let token = localStorage.getItem("TOKEN")
+    let token = localStorage.getItem("MAXBLOG_TOKEN")
+    let userId = localStorage.getItem("MAXBLOG_USER_ID")
     if (token) {
         axios.defaults.headers.common["Authorization"] = token
+        axios.defaults.headers.common["User_id"] = userId
     }
 }
 

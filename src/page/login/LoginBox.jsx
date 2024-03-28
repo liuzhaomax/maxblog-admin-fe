@@ -17,17 +17,6 @@ function LoginBox() {
     const [password, setPassword] = useState("")
     const [isLoading, setIsLoading] = useState(false)
 
-    const [messageApi, contextHolderMessage] = message.useMessage()
-    const [notificationApi, contextHolderNotification] = notification.useNotification()
-    const openNotification = (placement) => {
-        notificationApi.info({
-            message: "登录失败",
-            description: "请检查输入的用户名与密码",
-            icon: (<FrownOutlined style={{ color: "#ff4d4f" }} />),
-            placement,
-        })
-    }
-
     const encrypt = () => {
         let rsa = new JsEncrypt()
         let publicKey = atob(sessionStorage.getItem("puk"))
@@ -54,8 +43,18 @@ function LoginBox() {
             .catch(() => {
                 setIsLoading(false)
                 messageApi.error("登录失败")
-                openNotification("topRight")
+                openNotification()
             })
+    }
+    const [messageApi, contextHolderMessage] = message.useMessage()
+    const [notificationApi, contextHolderNotification] = notification.useNotification()
+    const openNotification = () => {
+        notificationApi.info({
+            message: "登录失败",
+            description: "请检查输入的用户名与密码",
+            icon: (<FrownOutlined style={{ color: "#ff4d4f" }} />),
+            placement: "topRight",
+        })
     }
 
     const onMobileChange = e => {
