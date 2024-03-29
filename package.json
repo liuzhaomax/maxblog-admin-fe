@@ -101,6 +101,7 @@
       "!src/**/*.d.ts"
     ],
     "setupFiles": [
+      "./jestGlobalSetup.js",
       "react-app-polyfill/jsdom"
     ],
     "setupFilesAfterEnv": [
