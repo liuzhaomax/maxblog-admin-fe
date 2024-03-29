@@ -110,7 +110,7 @@ pipeline {
             steps {
                 echo "--------------------- Lint Start ---------------------"
                 script {
-                    timeout(time: 5, unit: "MINUTES"){
+                    timeout(time: 15, unit: "MINUTES"){
                         npmHome = tool "npm"
                         sh """
                             export NODE_HOME=${npmHome}
