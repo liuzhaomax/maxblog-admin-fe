@@ -171,9 +171,8 @@ pipeline {
                 echo "--------------------- Build Image Start ---------------------"
                 timeout(time: 10, unit: "MINUTES"){
                     sh """
-                        echo "${JOB_NAME}:${tag}"
                         cd server
-                        docker build -t ${JOB_NAME}:${tag} .
+                        docker build -t ${ProjectKey}:${TAG} .
                         cd ..
                     """
                 }
@@ -187,8 +186,8 @@ pipeline {
                 timeout(time: 10, unit: "MINUTES"){
                     sh """
                         docker login -u ${harborUsername} -p ${harborPassword} ${harborAddress}
-                        docker tag ${JOB_NAME}:${tag} ${harborAddress}/${harborRepo}/${JOB_NAME}:${tag}
-                        docker push ${harborAddress}/${harborRepo}/${JOB_NAME}:${tag}
+                        docker tag ${ProjectKey}:${TAG} ${harborAddress}/${harborRepo}/${ProjectKey}:${TAG}
+                        docker push ${harborAddress}/${harborRepo}/${ProjectKey}:${TAG}
                     """
                 }
                 echo "--------------------- Push to Harbor End ---------------------"
@@ -199,7 +198,12 @@ pipeline {
             steps {
                 echo "--------------------- Deploy Start ---------------------"
                 timeout(time: 10, unit: "MINUTES"){
-                    sshPublisher(publishers: [sshPublisherDesc(configName: "test", transfers: [sshTransfer(cleanRemote: false, excludes: "", execCommand: "sudo deploy.sh $harborAddress $harborRepo $JOB_NAME $tag $container_port $host_port", execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: "[, ]+", remoteDirectory: "", remoteDirectorySDF: false, removePrefix: "", sourceFiles: "")], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                    echo "ENV: ${ENV}"
+                    echo "Port: ${Host_port}"
+                    sh """
+                        chmod +x ./server/deploy.sh
+                        ./server/deploy.sh $harborAddress $harborRepo $ProjectKey $TAG $Container_port $Host_port $ENV $DeploymentServerIP
+                    """
                 }
                 echo "--------------------- Deploy End ---------------------"
             }
