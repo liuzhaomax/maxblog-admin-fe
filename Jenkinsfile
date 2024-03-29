@@ -171,8 +171,7 @@ pipeline {
                 echo "--------------------- Build Image Start ---------------------"
                 timeout(time: 10, unit: "MINUTES"){
                     sh """
-                        echo ${JOB_NAME}
-                        echo ${tag}
+                        echo "${JOB_NAME}:${tag}"
                         cd server
                         docker build -t ${JOB_NAME}:${tag} .
                         cd ..
