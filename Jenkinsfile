@@ -132,7 +132,6 @@ pipeline {
                 script {
                     timeout(time: 5, unit: "MINUTES"){
                         npmHome = tool "npm" //变量名npm在jenkins全局工具里定义的
-                        echo "123"
                         sh """
                             export NODE_HOME=${npmHome}
                             export PATH=\$NODE_HOME/bin:\$PATH
@@ -172,6 +171,8 @@ pipeline {
                 echo "--------------------- Build Image Start ---------------------"
                 timeout(time: 10, unit: "MINUTES"){
                     sh """
+                        echo ${JOB_NAME}
+                        echo ${tag}
                         cd server
                         docker build -t ${JOB_NAME}:${tag} .
                         cd ..
