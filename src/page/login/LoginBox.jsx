@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import "./Login.css"
 import { Button, Input, message, notification } from "antd"
 import { EyeInvisibleOutlined, EyeTwoTone, FrownOutlined } from "@ant-design/icons"
@@ -16,6 +16,17 @@ function LoginBox() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(() => {
+        cleanLogin()
+    }, [])
+    const cleanLogin = () => {
+        dispatch(toggleAuth())
+        dispatch(setToken(""))
+        setAuthToken()
+        localStorage.removeItem("MAXBLOG_TOKEN")
+        localStorage.removeItem("MAXBLOG_USER_ID")
+    }
 
     const encrypt = () => {
         let rsa = new JsEncrypt()
