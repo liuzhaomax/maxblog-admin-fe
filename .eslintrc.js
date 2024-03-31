@@ -33,7 +33,8 @@ module.exports = {
         "server",
         "scripts",
         "test",
-        "jestGlobalSetup.js"
+        "jestGlobalSetup.js",
+        "**/SlateEditor/**"
     ],
     "rules": {
         "indent": [
