@@ -15,7 +15,7 @@ function MainLayout() {
     return (
         <Layout className="Layout">
             <Nav/>
-            <Layout style={{"height": "93vh"}}>
+            <Layout>
                 <SideMenu setCurrent={setCurrent}/>
                 <Outlet context={[ currentSelected ]}/>
             </Layout>
