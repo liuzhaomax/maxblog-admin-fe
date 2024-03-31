@@ -1,5 +1,7 @@
 .sider {
     background: #fff;
+    position: fixed !important;
+    height: 100% !important;
 }
 
 .sider li {

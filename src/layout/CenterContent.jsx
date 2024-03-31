@@ -40,12 +40,8 @@ function CenterContent() {
     }
 
     return (
-        <Layout style={{ padding: "0 24px 24px" }}>
-            <Breadcrumb
-                id="breadcrumb"
-                style={{ margin: "16px 0" }}
-                items={breadcrumbItems}>
-            </Breadcrumb>
+        <Layout className="center-content">
+            <Breadcrumb id="Breadcrumb" className="breadcrumb" items={breadcrumbItems}> </Breadcrumb>
             <Content className="content">
                 <Outlet />
             </Content>
