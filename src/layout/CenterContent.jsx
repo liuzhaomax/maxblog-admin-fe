@@ -33,15 +33,15 @@ function CenterContent() {
     const loadBreadcrumbItems = (website, modules) => {
         let names = getPath(modules)
         names = [website.NAME, ...names]
-        let items = names.map((name, index) => {
-            return { title: names[index] }
+        let items = names.map(name => {
+            return { title: name }
         })
         setBreadcrumbItems(items)
     }
 
     return (
         <Layout className="center-content">
-            <Breadcrumb id="Breadcrumb" className="breadcrumb" items={breadcrumbItems}> </Breadcrumb>
+            <Breadcrumb id="Breadcrumb" className="breadcrumb" items={breadcrumbItems}/>
             <Content className="content">
                 <Outlet />
             </Content>
