@@ -6,20 +6,20 @@ export const LOGIN = {
     FILE_PATH: "page/login/Login",
 }
 
+export const HOME = {
+    NAME: "首页",
+    KEY: "HOME",
+    PATH: "home",
+    FULL_PATH: "/home",
+    FILE_PATH: "page/home/Home",
+}
+
 export const STATS = {
     NAME: "统计",
     KEY: "STATS",
     PATH: "stats",
     FULL_PATH: "/maxblog/stats",
     FILE_PATH: "page/maxblog/stats/Stats",
-}
-
-export const HOME = {
-    NAME: "首页",
-    KEY: "HOME",
-    PATH: "home",
-    FULL_PATH: "/maxblog/home",
-    FILE_PATH: "page/maxblog/home/Home",
 }
 
 export const ARTICLE = {
@@ -78,8 +78,8 @@ export const PROJECT = {
 }
 
 export const MODULE_MAXBLOG = {
-    STATS,
     HOME,
+    STATS,
     ARTICLE,
     DEMO,
     PROJECT,

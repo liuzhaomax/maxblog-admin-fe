@@ -22,14 +22,14 @@ export const MENU_ITEMS_WITH_SUB = [
 
 export const SIDER_MENU_ITEMS = [
     {
-        key: STATS.KEY,
-        label: STATS.NAME,
-        icon: <AreaChartOutlined />,
-    },
-    {
         key: HOME.KEY,
         label: HOME.NAME,
         icon: <HomeOutlined />,
+    },
+    {
+        key: STATS.KEY,
+        label: STATS.NAME,
+        icon: <AreaChartOutlined />,
     },
     {
         key: ARTICLE.KEY,

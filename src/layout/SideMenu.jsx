@@ -14,11 +14,11 @@ function SideMenu(props) {
     const jump = e => {
         props.setCurrent(e.key)
         switch (e.key) {
-        case STATS.KEY:
-            navigate(STATS.FULL_PATH)
-            break
         case HOME.KEY:
             navigate(HOME.FULL_PATH)
+            break
+        case STATS.KEY:
+            navigate(STATS.FULL_PATH)
             break
         case ARTICLE.FUNCTIONS.ARTICLE_LIST.KEY:
             navigate(ARTICLE.FUNCTIONS.ARTICLE_LIST.FULL_PATH)

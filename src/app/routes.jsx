@@ -6,7 +6,7 @@ import { HOME, ARTICLE, LOGIN, MAXBLOG, STATS, DEMO, PROJECT } from "../config/m
 import { CENTER_CONTENT, MAIN_LAYOUT } from "../config/layout"
 import Login from "../page/login/Login"
 import MaxBlog from "../page/maxblog/index/MaxBlog"
-import Stats from "../page/maxblog/stats/Stats"
+import Home from "../page/home/Home"
 
 const lazyLoad = path => {
     const Comp = React.lazy(() => import(`../${path}`))
@@ -24,8 +24,8 @@ export default (
         <Route path={MAXBLOG.PATH} element={<MaxBlog/>}/>
         <Route element={lazyLoad(MAIN_LAYOUT.FILE_PATH)}>
             <Route element={lazyLoad(CENTER_CONTENT.FILE_PATH)}>
-                <Route path={STATS.FULL_PATH} element={<Stats/>}/>
-                <Route path={HOME.FULL_PATH} element={lazyLoad(HOME.FILE_PATH)}/>
+                <Route path={HOME.FULL_PATH} element={<Home/>}/>
+                <Route path={STATS.FULL_PATH} element={lazyLoad(STATS.FILE_PATH)}/>
                 <Route path={ARTICLE.FUNCTIONS.ARTICLE_LIST.FULL_PATH} element={lazyLoad(ARTICLE.FUNCTIONS.ARTICLE_LIST.FILE_PATH)}/>
                 <Route path={ARTICLE.FUNCTIONS.ARTICLE_TAGS.FULL_PATH} element={lazyLoad(ARTICLE.FUNCTIONS.ARTICLE_TAGS.FILE_PATH)}/>
                 <Route path={DEMO.FUNCTIONS.DEMO_LIST.FULL_PATH} element={lazyLoad(DEMO.FUNCTIONS.DEMO_LIST.FILE_PATH)}/>
