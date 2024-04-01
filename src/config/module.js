@@ -18,7 +18,7 @@ export const STATS = {
     NAME: "统计",
     KEY: "STATS",
     PATH: "stats",
-    FULL_PATH: "/maxblog/stats",
+    FULL_PATH: "/stats",
     FILE_PATH: "page/maxblog/stats/Stats",
 }
 
@@ -26,20 +26,20 @@ export const ARTICLE = {
     NAME: "文章",
     KEY: "ARTICLE",
     PATH: "article",
-    FULL_PATH: "/maxblog/article",
+    FULL_PATH: "/article",
     FUNCTIONS: {
         ARTICLE_LIST: {
             NAME: "文章列表",
             KEY: "ARTICLE_LIST",
             PATH: "articleList",
-            FULL_PATH: "/maxblog/article/articleList",
+            FULL_PATH: "/article/articleList",
             FILE_PATH: "page/maxblog/article/ArticleList",
         },
         ARTICLE_TAGS: {
             NAME: "标签",
             KEY: "ARTICLE_TAGS",
             PATH: "articleTags",
-            FULL_PATH: "/maxblog/article/articleTags",
+            FULL_PATH: "/article/articleTags",
             FILE_PATH: "page/maxblog/article/ArticleTags",
         },
     },
@@ -49,13 +49,13 @@ export const DEMO = {
     NAME: "样例",
     KEY: "DEMO",
     PATH: "demo",
-    FULL_PATH: "/maxblog/demo",
+    FULL_PATH: "/demo",
     FUNCTIONS: {
         DEMO_LIST: {
             NAME: "样例列表",
             KEY: "DEMO_LIST",
             PATH: "demoList",
-            FULL_PATH: "/maxblog/demo/demoList",
+            FULL_PATH: "/demo/demoList",
             FILE_PATH: "page/maxblog/demo/DemoList",
         },
     },
@@ -65,13 +65,13 @@ export const PROJECT = {
     NAME: "项目",
     KEY: "PROJECT",
     PATH: "project",
-    FULL_PATH: "/maxblog/project",
+    FULL_PATH: "/project",
     FUNCTIONS: {
         PROJECT_LIST: {
             NAME: "项目列表",
             KEY: "PROJECT_LIST",
             PATH: "projectList",
-            FULL_PATH: "/maxblog/project/projectList",
+            FULL_PATH: "/project/projectList",
             FILE_PATH: "page/maxblog/project/ProjectList",
         },
     },
