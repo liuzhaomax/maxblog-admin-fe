@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import "./Article.css"
+import "./ArticleList.css"
 import { ARTICLE } from "../../../config/module"
 import { Button, List, Space } from "antd"
 import { LikeOutlined, EyeOutlined, ClockCircleOutlined } from "@ant-design/icons"
@@ -113,7 +113,7 @@ function ArticleList() {
                         }
                     >
                         <List.Item.Meta
-                            title={<a href={item.href} target="_blank" rel="noreferrer">{item.title}</a>}
+                            title={<a href={item.href}>{item.title}</a>}
                             description={item.tags}
                         />
                         {item.preview}

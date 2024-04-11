@@ -1,0 +1,11 @@
+.ARTICLE_LIST {
+
+}
+
+.ARTICLE_LIST img:hover {
+    cursor: pointer;
+}
+
+.ARTICLE_LIST a {
+    font-size: 18px;
+}
