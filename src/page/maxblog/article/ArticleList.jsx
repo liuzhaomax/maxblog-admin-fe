@@ -68,11 +68,11 @@ function ArticleList() {
     }
 
     const onClickListImage = (id) => {
-        navigate(`${ARTICLE.FUNCTIONS.ARTICLE_LIST.FUNCTIONS.ARTICLE.FULL_PATH}?articleId=${id}`)
+        navigate(`${ARTICLE.FUNCTIONS.ARTICLE_LIST.FUNCTIONS.UPDATE_ARTICLE.FULL_PATH}?articleId=${id}`)
     }
 
     const onClickListTitle = (id) => {
-        navigate(`${ARTICLE.FUNCTIONS.ARTICLE_LIST.FUNCTIONS.ARTICLE.FULL_PATH}?articleId=${id}`)
+        navigate(`${ARTICLE.FUNCTIONS.ARTICLE_LIST.FUNCTIONS.UPDATE_ARTICLE.FULL_PATH}?articleId=${id}`)
     }
 
     return (

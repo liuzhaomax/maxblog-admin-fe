@@ -36,12 +36,19 @@ export const ARTICLE = {
             FULL_PATH: "/maxblog/article/list",
             FILE_PATH: "page/maxblog/article/ArticleList",
             FUNCTIONS: {
-                ARTICLE: {
-                    NAME: "文章",
-                    KEY: "ARTICLEARTICLE",
-                    PATH: "article/article",
-                    FULL_PATH: "/maxblog/article/article",
-                    FILE_PATH: "page/maxblog/article/ArticleArticle",
+                CREATE_ARTICLE: {
+                    NAME: "创建文章",
+                    KEY: "CREATE_ARTICLE",
+                    PATH: "article/createArticle",
+                    FULL_PATH: "/maxblog/article/createArticle",
+                    FILE_PATH: "page/maxblog/article/CreateArticle",
+                },
+                UPDATE_ARTICLE: {
+                    NAME: "更新文章",
+                    KEY: "UPDATE_ARTICLE",
+                    PATH: "article/updateArticle",
+                    FULL_PATH: "/maxblog/article/updateArticle",
+                    FILE_PATH: "page/maxblog/article/UpdateArticle",
                 },
             },
         },
