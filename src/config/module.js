@@ -1,3 +1,4 @@
+// 前端模块
 export const LOGIN = {
     NAME: "登录页",
     KEY: "Login",
@@ -34,13 +35,13 @@ export const ARTICLE = {
             PATH: "articleList",
             FULL_PATH: "/maxblog/article/list",
             FILE_PATH: "page/maxblog/article/ArticleList",
-            CHILDREN: {
+            FUNCTIONS: {
                 ARTICLE: {
-                    NAME: "文章文章",
+                    NAME: "文章",
                     KEY: "ARTICLEARTICLE",
                     PATH: "article/article",
-                    FULL_PATH: "/article/article",
-                    FILE_PATH: "page/article/ArticleArticle",
+                    FULL_PATH: "/maxblog/article/article",
+                    FILE_PATH: "page/maxblog/article/ArticleArticle",
                 },
             },
         },

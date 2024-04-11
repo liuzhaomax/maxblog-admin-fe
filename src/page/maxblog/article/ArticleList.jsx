@@ -42,7 +42,7 @@ function ArticleList() {
         let data = articleListRes.map(item => {
             article = {
                 id: item.id,
-                href: `${config.beBaseUrl}${URL.INNER.Maxblog}${URL.INNER.ArticleArticle}?articleId=${item.id}`,
+                href: `${config.beBaseUrl}${ARTICLE.FUNCTIONS.ARTICLE_LIST.FUNCTIONS.ARTICLE.FULL_PATH}?articleId=${item.id}`,
                 title: item.title,
                 tags: "",
                 preview: item.content.slice(0, 50) + " ...", // 前50个字符
@@ -66,7 +66,7 @@ function ArticleList() {
     }
 
     const onClickListImage = (id) => {
-        window.open(`${URL.INNER.ArticleArticle}?articleId=${id}`, "_blank")
+        window.open(`${ARTICLE.FUNCTIONS.ARTICLE_LIST.FUNCTIONS.ARTICLE.FULL_PATH}?articleId=${id}`)
     }
 
     return (
