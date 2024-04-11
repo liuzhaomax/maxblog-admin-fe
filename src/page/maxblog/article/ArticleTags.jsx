@@ -1,5 +1,5 @@
 import React from "react"
-import "./ArticleList.css"
+import "./ArticleTags.css"
 import { ARTICLE } from "../../../config/module"
 
 function ArticleTags() {
