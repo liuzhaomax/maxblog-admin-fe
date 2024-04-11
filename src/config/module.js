@@ -34,6 +34,15 @@ export const ARTICLE = {
             PATH: "articleList",
             FULL_PATH: "/maxblog/article/list",
             FILE_PATH: "page/maxblog/article/ArticleList",
+            CHILDREN: {
+                ARTICLE: {
+                    NAME: "文章文章",
+                    KEY: "ARTICLEARTICLE",
+                    PATH: "article/article",
+                    FULL_PATH: "/article/article",
+                    FILE_PATH: "page/article/ArticleArticle",
+                },
+            },
         },
         ARTICLE_TAGS: {
             NAME: "标签",
