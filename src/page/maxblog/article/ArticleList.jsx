@@ -20,7 +20,7 @@ function ArticleList() {
 
     const [pageNo, setPageNo] = useState(1)
     const [pageSize, setPageSize] = useState(5)
-    const [data, setData] = useState([]) // list data
+    const [articleListRes, setArticleListRes] = useState([]) // list data
 
     useEffect(() => {
         loadArticleList()
@@ -64,7 +64,7 @@ function ArticleList() {
             article.tags = tagNameStr
             return article
         })
-        setData(data)
+        setArticleListRes(data)
     }
 
     const onClickListImage = (id) => {
@@ -100,7 +100,7 @@ function ArticleList() {
                         page: "页"
                     },
                 }}
-                dataSource={data}
+                dataSource={articleListRes}
                 renderItem={(item) => (
                     <List.Item
                         key={item.title}
