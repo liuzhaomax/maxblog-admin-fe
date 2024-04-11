@@ -24,6 +24,7 @@ const ArticleArticle = () => {
     return (
         <div id={ARTICLE.FUNCTIONS.ARTICLE_LIST.FUNCTIONS.ARTICLE.KEY} className={ARTICLE.FUNCTIONS.ARTICLE_LIST.FUNCTIONS.ARTICLE.KEY}>
             <div className="article-article-container">
+
             </div>
         </div>
     )

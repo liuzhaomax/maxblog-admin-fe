@@ -6,6 +6,7 @@ import { LikeOutlined, EyeOutlined, ClockCircleOutlined } from "@ant-design/icon
 import { getArticleList } from "./handlers"
 import config from "../../../config/config"
 import { URL } from "../../../config/url"
+import { useNavigate } from "react-router-dom"
 
 const IconText = ({ icon, text }) => (
     <Space>
@@ -15,6 +16,8 @@ const IconText = ({ icon, text }) => (
 )
 
 function ArticleList() {
+    const navigate = useNavigate()
+
     const [pageNo, setPageNo] = useState(1)
     const [pageSize, setPageSize] = useState(5)
     const [data, setData] = useState([]) // list data
@@ -42,7 +45,6 @@ function ArticleList() {
         let data = articleListRes.map(item => {
             article = {
                 id: item.id,
-                href: `${config.beBaseUrl}${ARTICLE.FUNCTIONS.ARTICLE_LIST.FUNCTIONS.ARTICLE.FULL_PATH}?articleId=${item.id}`,
                 title: item.title,
                 tags: "",
                 preview: item.content.slice(0, 50) + " ...", // 前50个字符
@@ -66,7 +68,11 @@ function ArticleList() {
     }
 
     const onClickListImage = (id) => {
-        window.open(`${ARTICLE.FUNCTIONS.ARTICLE_LIST.FUNCTIONS.ARTICLE.FULL_PATH}?articleId=${id}`)
+        navigate(`${ARTICLE.FUNCTIONS.ARTICLE_LIST.FUNCTIONS.ARTICLE.FULL_PATH}?articleId=${id}`)
+    }
+
+    const onClickListTitle = (id) => {
+        navigate(`${ARTICLE.FUNCTIONS.ARTICLE_LIST.FUNCTIONS.ARTICLE.FULL_PATH}?articleId=${id}`)
     }
 
     return (
@@ -113,7 +119,7 @@ function ArticleList() {
                         }
                     >
                         <List.Item.Meta
-                            title={<a href={item.href}>{item.title}</a>}
+                            title={<div className="article-list-title" onClick={() => onClickListTitle(item.id)} >{item.title}</div>}
                             description={item.tags}
                         />
                         {item.preview}
