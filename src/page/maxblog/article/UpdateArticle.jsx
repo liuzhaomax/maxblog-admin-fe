@@ -2,8 +2,8 @@ import "./UpdateArticle.css"
 import React, { useState, useEffect } from "react"
 import { getArticleArticle, postArticleArticleCoverUpload, putArticleArticle } from "./handlers"
 import { ARTICLE } from "../../../config/module"
-import { Button, Input, Image, Upload, notification } from "antd"
-import { PlusOutlined } from "@ant-design/icons"
+import { Button, Input, Image, Upload, notification, Modal } from "antd"
+import { PlusOutlined, ExclamationCircleOutlined } from "@ant-design/icons"
 import { useNavigate } from "react-router-dom"
 import { deepCopy } from "../../../utils/deepCopy"
 import config from "../../../config/config"
@@ -105,13 +105,31 @@ const UpdateArticle = () => {
         })
     }
     
-    // 确认取消按钮
+    // 保存返回按钮
     const onClickBack = () => {
-        navigate(ARTICLE.FUNCTIONS.ARTICLE_LIST.FULL_PATH)
+        showBackModal()
+    }
+    const [modal, contextHolderModal] = Modal.useModal()
+    const showBackModal = () => {
+        modal.confirm({
+            title: "返回确认",
+            icon: <ExclamationCircleOutlined />,
+            content: (
+                <>
+                    <p>尚未保存更改，请确认是否返回？</p>
+                    <p>点击取消，则取消；</p>
+                    <p>点击确认，则不保存并返回</p>
+                </>
+            ),
+            okText: "确认",
+            cancelText: "取消",
+            onOk: () => {
+                navigate(ARTICLE.FUNCTIONS.ARTICLE_LIST.FULL_PATH)
+            },
+        })
     }
 
     const onClickSave = () => {
-        // TODO 发送请求更新文章
         let body = deepCopy(articleRes)
         putArticleArticle(body)
             .then(() => {
@@ -187,6 +205,7 @@ const UpdateArticle = () => {
                 </div>
             </div>
             {contextHolderNotification}
+            {contextHolderModal}
         </div>
     )
 }
