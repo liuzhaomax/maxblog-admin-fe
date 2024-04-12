@@ -20,3 +20,18 @@ export const getArticleArticle = (id) => {
     axios.defaults.headers.common["Request_id"] = short().new()
     return axios.get(URL.INNER.ArticleArticle + `?articleId=${id}`)
 }
+
+export const putArticleArticle = (body) => {
+    axios.defaults.headers.common["Request_id"] = short().new()
+    return axios.put(URL.INNER.ArticleArticle + `?articleId=${body.id}`, body)
+}
+
+export const postArticleArticleCoverUpload = (id, file) => {
+    axios.defaults.headers.common["Request_id"] = short().new()
+    let headers = Object.assign({}, axios.defaults.headers.common, {
+        "Content-Type": "multipart/form-data"
+    })
+    return axios.post(URL.INNER.UploadCoverImage + `?articleId=${id}`, file,{
+        headers: headers,
+    })
+}

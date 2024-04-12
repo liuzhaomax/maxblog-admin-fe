@@ -9,6 +9,7 @@
 .article-article-input-header {
     font-weight: bold;
     font-size: 16px;
+    min-width: 80px;
 }
 
 .article-article-input {
@@ -42,4 +43,7 @@
     margin: 30px 10px;
 }
 
+.article-article-cover-wrap {
+    height: 110px;
+}
 
