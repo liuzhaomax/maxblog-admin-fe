@@ -2,7 +2,7 @@ import "./UpdateArticle.css"
 import React, { useState, useEffect } from "react"
 import { getArticleArticle, postArticleArticleCoverUpload, putArticleArticle } from "./handlers"
 import { ARTICLE } from "../../../config/module"
-import { Button, Input, Image, Upload } from "antd"
+import { Button, Input, Image, Upload, notification } from "antd"
 import { PlusOutlined } from "@ant-design/icons"
 import { useNavigate } from "react-router-dom"
 import { deepCopy } from "../../../utils/deepCopy"
@@ -79,14 +79,30 @@ const UpdateArticle = () => {
         postArticleArticleCoverUpload(articleRes.id, formData)
             .then(() => {
                 opt.onSuccess()
+                openCoverUploadSuccessNotification()
                 let data = deepCopy(articleRes)
                 data.cover = opt.file.name
                 setArticleRes(data)
             })
             .catch(err => {
-                console.log(err)
+                openCoverUploadErrorNotification()
                 opt.onError(err)
             })
+    }
+    const [notificationApi, contextHolderNotification] = notification.useNotification()
+    const openCoverUploadSuccessNotification = () => {
+        notificationApi["success"]({
+            message: "封面图片上传成功",
+            description: "点击“保存”按钮，才能生效",
+            placement: "topRight",
+        })
+    }
+    const openCoverUploadErrorNotification = () => {
+        notificationApi["error"]({
+            message: "封面图片上传失败",
+            description: "请检查图片格式，尝试重新上传",
+            placement: "topRight",
+        })
     }
     
     // 确认取消按钮
@@ -94,7 +110,7 @@ const UpdateArticle = () => {
         navigate(ARTICLE.FUNCTIONS.ARTICLE_LIST.FULL_PATH)
     }
 
-    const onClickConfirm = () => {
+    const onClickSave = () => {
         // TODO 发送请求更新文章
         let body = deepCopy(articleRes)
         putArticleArticle(body)
@@ -104,7 +120,6 @@ const UpdateArticle = () => {
             .catch(err => {
                 console.log(err)
             })
-        // TODO 封面图片上传与预览
         // TODO 分类标签
         // TODO slateEditor
         // TODO 创建文章
@@ -168,9 +183,10 @@ const UpdateArticle = () => {
                 </div>
                 <div className="article-article-button-wrap">
                     <Button className="article-article-button" onClick={onClickBack}>返回</Button>
-                    <Button className="article-article-button" onClick={onClickConfirm} type="primary">确认</Button>
+                    <Button className="article-article-button" onClick={onClickSave} type="primary">保存</Button>
                 </div>
             </div>
+            {contextHolderNotification}
         </div>
     )
 }
