@@ -133,7 +133,8 @@ const UpdateArticle = () => {
         let body = deepCopy(articleRes)
         putArticleArticle(body)
             .then(() => {
-
+                openSaveSuccessNotification()
+                navigate(ARTICLE.FUNCTIONS.ARTICLE_LIST.FULL_PATH)
             })
             .catch(err => {
                 console.log(err)
@@ -142,7 +143,13 @@ const UpdateArticle = () => {
         // TODO slateEditor
         // TODO 创建文章
         // TODO 删除文章
-        // navigate(ARTICLE.FUNCTIONS.ARTICLE_LIST.FULL_PATH)
+    }
+    const openSaveSuccessNotification = () => {
+        // 静态写法不推荐，会出warning，UI会变化，会影响有监听的生命周期hook，但ArticleList中没有监听的useEffect，所以没副作用
+        notification["success"]({
+            message: "文章保存成功",
+            placement: "topRight",
+        })
     }
 
     return (
