@@ -1,8 +1,8 @@
 import "./ArticleArticle.css"
 import React, { useState, useEffect } from "react"
-import { getArticleArticle, postArticleArticleCoverUpload, putArticleArticle } from "./handlers"
+import { getArticleArticle, postArticleArticleCoverUpload, putArticleArticle, getArticleTags } from "./handlers"
 import { ARTICLE } from "../../../config/module"
-import { Button, Input, Image, Upload, notification, Modal } from "antd"
+import { Button, Input, Image, Upload, notification, Modal, Tag } from "antd"
 import { PlusOutlined, ExclamationCircleOutlined } from "@ant-design/icons"
 import { useNavigate } from "react-router-dom"
 import { deepCopy } from "../../../utils/deepCopy"
@@ -40,7 +40,10 @@ const ArticleArticle = () => {
                         url: `${config.beBaseUrl}${URL.INNER.Static}${URL.INNER.Maxblog}${URL.INNER.Article}/${res.data.data.id}/${res.data.data.cover}`,
                     },
                 ]
+                // 读取文章原有图片
                 setFileList(initialFileList)
+                // 读取文章原有标签
+                setSelectedTags(res.data.data.tags)
             })
             .catch(err => {
                 console.log(err)
@@ -50,6 +53,9 @@ const ArticleArticle = () => {
     const handleTextChange = (e, key) => {
         let data = deepCopy(articleRes)
         data[key] = e.target.value
+        if (key === "tags") {
+            data[key] = data[key].split(",")
+        }
         setArticleRes(data)
     }
     
@@ -104,6 +110,40 @@ const ArticleArticle = () => {
             placement: "topRight",
         })
     }
+
+    // 标签
+    const [tags, setTags] = useState([])
+    useEffect(() => {
+        loadTags()
+    }, [])
+    const loadTags = () => {
+        getArticleTags()
+            .then(res => {
+                setTags(res.data.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+    const [selectedTags, setSelectedTags] = useState([])
+    const handleTagChange = (tag, checked) => {
+        const nextSelectedTags = checked
+            ? [...selectedTags, tag]
+            : selectedTags.filter((t) => t !== tag)
+        setSelectedTags(nextSelectedTags)
+        updateTagsInput(nextSelectedTags)
+    }
+    const updateTagsInput = (nextSelectedTags) => {
+        let data = articleRes
+        let differentElements = []
+        data.tags.forEach(element => {
+            if (!nextSelectedTags.includes(element) && !tags.includes(element)) {
+                differentElements.push(element)
+            }
+        })
+        data.tags = [...nextSelectedTags, ...differentElements]
+        setArticleRes(data)
+    }
     
     // 保存返回按钮
     const onClickBack = () => {
@@ -139,7 +179,6 @@ const ArticleArticle = () => {
             .catch(err => {
                 console.log(err)
             })
-        // TODO 分类标签
         // TODO slateEditor
         // TODO 创建文章 写在一起
         // TODO 删除文章
@@ -173,7 +212,7 @@ const ArticleArticle = () => {
                 </div>
                 <div className="article-article-input-wrap article-article-cover-wrap">
                     <div className="article-article-input-header">封面图片：</div>
-                    <div className="article-article-input">
+                    <div className="article-article-input article-article-cover-upload">
                         <Upload
                             action=""
                             name="file"
@@ -200,7 +239,24 @@ const ArticleArticle = () => {
                 </div>
                 <div className="article-article-input-wrap">
                     <div className="article-article-input-header">分类标签：</div>
-                    <Input className="article-article-input" placeholder="tags" value={articleRes ? articleRes.tags : ""} onChange={(e) => handleTextChange(e, "tags")} />
+                    <Input className="article-article-input" placeholder="tags" value={articleRes ? articleRes.tags : []} onChange={(e) => handleTextChange(e, "tags")} />
+                </div>
+                <div className="article-article-tags-item-warp">
+                    {
+                        tags.length === 0 ?
+                            <></>
+                            :
+                            tags.map(tag => (
+                                <Tag.CheckableTag
+                                    className="article-article-tags-item"
+                                    key={tag}
+                                    checked={selectedTags.includes(tag)}
+                                    onChange={(checked) => handleTagChange(tag, checked)}
+                                >
+                                    {tag}
+                                </Tag.CheckableTag>
+                            ))
+                    }
                 </div>
                 <div className="article-article-input-wrap">
                     <div className="article-article-input-header">文章内容：</div>

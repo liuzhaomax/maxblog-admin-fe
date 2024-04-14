@@ -47,3 +47,18 @@
     height: 110px;
 }
 
+.article-article-cover-upload {
+    margin-left: 10px;
+}
+
+.article-article-tags-item {
+    font-size: 16px;
+    border: 1px solid #338e6c;
+    margin-right: 10px;
+}
+
+.article-article-tags-item-warp {
+    margin-left: 90px;
+    margin-bottom: 10px;
+}
+
