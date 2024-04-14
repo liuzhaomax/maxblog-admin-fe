@@ -1,4 +1,4 @@
-import "./UpdateArticle.css"
+import "./ArticleArticle.css"
 import React, { useState, useEffect } from "react"
 import { getArticleArticle, postArticleArticleCoverUpload, putArticleArticle } from "./handlers"
 import { ARTICLE } from "../../../config/module"
@@ -17,7 +17,7 @@ const getBase64 = (file) =>
         reader.onerror = (error) => reject(error)
     })
 
-const UpdateArticle = () => {
+const ArticleArticle = () => {
     const navigate = useNavigate()
 
     const [articleRes, setArticleRes] = useState(null)
@@ -217,4 +217,4 @@ const UpdateArticle = () => {
     )
 }
 
-export default UpdateArticle
+export default ArticleArticle
