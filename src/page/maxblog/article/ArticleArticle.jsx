@@ -188,7 +188,6 @@ const ArticleArticle = () => {
                 console.log(err)
             })
         // TODO 创建文章 写在一起
-        // TODO 删除文章
     }
     const openSaveSuccessNotification = () => {
         // 静态写法不推荐，会出warning，UI会变化，会影响有监听的生命周期hook，但ArticleList中没有监听的useEffect，所以没副作用

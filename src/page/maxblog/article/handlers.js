@@ -35,3 +35,8 @@ export const postArticleArticleCoverUpload = (id, file) => {
         headers: headers,
     })
 }
+
+export const deleteArticleArticle = (id) => {
+    axios.defaults.headers.common["Request_id"] = short().new()
+    return axios.delete(URL.INNER.ArticleArticle + `?articleId=${id}`)
+}

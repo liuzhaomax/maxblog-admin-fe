@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react"
 import "./ArticleList.css"
 import { ARTICLE } from "../../../config/module"
-import { Button, List, Space, Input } from "antd"
-import { LikeOutlined, EyeOutlined, ClockCircleOutlined, DeleteOutlined } from "@ant-design/icons"
-import { getArticleList } from "./handlers"
+import { Button, List, Space, Input, Modal } from "antd"
+import {
+    LikeOutlined,
+    EyeOutlined,
+    ClockCircleOutlined,
+    DeleteOutlined,
+    ExclamationCircleOutlined,
+} from "@ant-design/icons"
+import { deleteArticleArticle, getArticleList } from "./handlers"
 import config from "../../../config/config"
 import { URL } from "../../../config/url"
 import { useNavigate } from "react-router-dom"
@@ -11,8 +17,8 @@ import MarkdownIt from "markdown-it"
 
 const { Search } = Input
 
-const IconText = ({ icon, text }) => (
-    <Space>
+const IconText = ({ icon, text, onClick }) => (
+    <Space onClick={onClick}>
         {React.createElement(icon)}
         {text}
     </Space>
@@ -89,6 +95,34 @@ function ArticleList() {
         navigate(`${ARTICLE.FUNCTIONS.ARTICLE_LIST.FUNCTIONS.UPDATE_ARTICLE.FULL_PATH}?articleId=${id}`)
     }
 
+    // 删除文章
+    const handleDelete = (id, title) => {
+        showBackModal(id, title)
+    }
+    const [modal, contextHolderModal] = Modal.useModal()
+    const showBackModal = (id, title) => {
+        modal.confirm({
+            title: "确认删除？",
+            icon: <ExclamationCircleOutlined />,
+            content: (
+                <>
+                    <p>请确认是否删除文章：{title}</p>
+                </>
+            ),
+            okText: "确认",
+            cancelText: "取消",
+            onOk: () => {
+                deleteArticleArticle(id)
+                    .then(() => {
+                        loadArticleList()
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            },
+        })
+    }
+
     return (
         <div id={ARTICLE.FUNCTIONS.ARTICLE_LIST.KEY} className={ARTICLE.FUNCTIONS.ARTICLE_LIST.KEY}>
             <div className="article-list-tool-wrap">
@@ -131,7 +165,7 @@ function ArticleList() {
                             <IconText icon={EyeOutlined} text={item.view} key="list-vertical-view-o" />,
                             <IconText icon={LikeOutlined} text={item.like} key="list-vertical-like-o" />,
                             <IconText icon={ClockCircleOutlined} text={item.updatedAt} key="list-vertical-datetime" />,
-                            <IconText icon={DeleteOutlined} text="删除" key="list-vertical-delete"/>,
+                            <IconText icon={DeleteOutlined} text="删除" key="list-vertical-delete" onClick={() => handleDelete(item.id, item.title)}/>,
                         ]}
                         extra={
                             <img
@@ -150,6 +184,7 @@ function ArticleList() {
                     </List.Item>
                 )}
             />
+            {contextHolderModal}
         </div>
     )
 }
