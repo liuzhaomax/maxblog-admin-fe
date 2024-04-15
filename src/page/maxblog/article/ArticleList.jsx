@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react"
 import "./ArticleList.css"
 import { ARTICLE } from "../../../config/module"
-import { Button, List, Space } from "antd"
-import { LikeOutlined, EyeOutlined, ClockCircleOutlined } from "@ant-design/icons"
+import { Button, List, Space, Input } from "antd"
+import { LikeOutlined, EyeOutlined, ClockCircleOutlined, DeleteOutlined } from "@ant-design/icons"
 import { getArticleList } from "./handlers"
 import config from "../../../config/config"
 import { URL } from "../../../config/url"
 import { useNavigate } from "react-router-dom"
 import MarkdownIt from "markdown-it"
+
+const { Search } = Input
 
 const IconText = ({ icon, text }) => (
     <Space>
@@ -19,19 +21,29 @@ const IconText = ({ icon, text }) => (
 function ArticleList() {
     const navigate = useNavigate()
 
+    // 搜索
+    const [searchingStr, setSearchingStr] = useState("")
+    const [searchLoading, setSearchLoading] = useState(false)
+    const onSearch = (value) => {
+        setSearchLoading(true)
+        setSearchingStr(value)
+        setSearchLoading(false)
+    }
+
+    // 获取文章列表
     const [pageNo, setPageNo] = useState(1)
     const [pageSize, setPageSize] = useState(5)
     const [articleListRes, setArticleListRes] = useState([]) // list data
 
     useEffect(() => {
         loadArticleList()
-    }, [])
+    }, [searchingStr])
     const loadArticleList = () => {
         let params = {
             pageNo: pageNo,
             pageSize: pageSize,
             tagName: "",
-            search: "",
+            search: searchingStr,
         }
         getArticleList(params)
             .then(res => {
@@ -79,7 +91,16 @@ function ArticleList() {
 
     return (
         <div id={ARTICLE.FUNCTIONS.ARTICLE_LIST.KEY} className={ARTICLE.FUNCTIONS.ARTICLE_LIST.KEY}>
-            <Button type="primary">创建文章</Button>
+            <div className="article-list-tool-wrap">
+                <Button type="primary">创建文章</Button>
+                <Search
+                    className="article-list-tool-search"
+                    placeholder="搜索标题和正文"
+                    onSearch={onSearch}
+                    enterButton
+                    loading={searchLoading}
+                />
+            </div>
             <List
                 itemLayout="vertical"
                 size="large"
@@ -110,6 +131,7 @@ function ArticleList() {
                             <IconText icon={EyeOutlined} text={item.view} key="list-vertical-view-o" />,
                             <IconText icon={LikeOutlined} text={item.like} key="list-vertical-like-o" />,
                             <IconText icon={ClockCircleOutlined} text={item.updatedAt} key="list-vertical-datetime" />,
+                            <IconText icon={DeleteOutlined} text="删除" key="list-vertical-delete"/>,
                         ]}
                         extra={
                             <img
