@@ -21,11 +21,35 @@ const getBase64 = (file) =>
 const ArticleArticle = () => {
     const navigate = useNavigate()
 
-    const [articleRes, setArticleRes] = useState(null)
+    const [articleRes, setArticleRes] = useState(
+        {
+            "id": "",
+            "createdAt": "",
+            "updatedAt": "",
+            "deletedAt": "",
+            "title": "",
+            "author": "",
+            "reference": "",
+            "link": "",
+            "view": 0,
+            "like": 0,
+            "cover": "",
+            "content": "",
+            "tags": []
+        }
+    )
     useEffect(() => {
         loadArticle()
     }, [])
     const loadArticle = () => {
+        // 判断是加载更新页还是新建页
+        const path = window.location.pathname
+        const pathArr = path.split("/")
+        const pageName = pathArr[pathArr.length - 1]
+        if (pageName === ARTICLE.FUNCTIONS.ARTICLE_LIST.FUNCTIONS.CREATE_ARTICLE.PATH) {
+            return
+        }
+        // 更新页逻辑
         const queryString = window.location.search
         const params = new URLSearchParams(queryString)
         const articleId = params.get("articleId")
@@ -51,6 +75,7 @@ const ArticleArticle = () => {
             })
     }
 
+    // 文本框变化处理
     const handleTextChange = (e, key) => {
         let data = deepCopy(articleRes)
         data[key] = e.target.value

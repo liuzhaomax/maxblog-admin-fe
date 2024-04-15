@@ -123,10 +123,15 @@ function ArticleList() {
         })
     }
 
+    // 新建文章
+    const handleCreateArticle = () => {
+        navigate(`${ARTICLE.FUNCTIONS.ARTICLE_LIST.FUNCTIONS.CREATE_ARTICLE.FULL_PATH}?articleId=`)
+    }
+
     return (
         <div id={ARTICLE.FUNCTIONS.ARTICLE_LIST.KEY} className={ARTICLE.FUNCTIONS.ARTICLE_LIST.KEY}>
             <div className="article-list-tool-wrap">
-                <Button type="primary">创建文章</Button>
+                <Button type="primary" onClick={handleCreateArticle}>创建文章</Button>
                 <Search
                     className="article-list-tool-search"
                     placeholder="搜索标题和正文"

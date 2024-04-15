@@ -39,14 +39,14 @@ export const ARTICLE = {
                 CREATE_ARTICLE: {
                     NAME: "创建文章",
                     KEY: "CREATE_ARTICLE",
-                    PATH: "article/createArticle",
+                    PATH: "createArticle",
                     FULL_PATH: "/maxblog/article/createArticle",
                     FILE_PATH: "page/maxblog/article/ArticleArticle",
                 },
                 UPDATE_ARTICLE: {
                     NAME: "更新文章",
                     KEY: "UPDATE_ARTICLE",
-                    PATH: "article/updateArticle",
+                    PATH: "updateArticle",
                     FULL_PATH: "/maxblog/article/updateArticle",
                     FILE_PATH: "page/maxblog/article/ArticleArticle",
                 },
