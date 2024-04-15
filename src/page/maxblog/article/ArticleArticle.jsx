@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom"
 import { deepCopy } from "../../../utils/deepCopy"
 import config from "../../../config/config"
 import { URL } from "../../../config/url"
+import Markdown from "./Markdown"
 
 const getBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -144,6 +145,13 @@ const ArticleArticle = () => {
         data.tags = [...nextSelectedTags, ...differentElements]
         setArticleRes(data)
     }
+
+    // 内容
+    const setContent = (text) => {
+        let data = articleRes
+        data.content = text
+        setArticleRes(data)
+    }
     
     // 保存返回按钮
     const onClickBack = () => {
@@ -179,7 +187,6 @@ const ArticleArticle = () => {
             .catch(err => {
                 console.log(err)
             })
-        // TODO slateEditor
         // TODO 创建文章 写在一起
         // TODO 删除文章
     }
@@ -260,8 +267,8 @@ const ArticleArticle = () => {
                 </div>
                 <div className="article-article-input-wrap">
                     <div className="article-article-input-header">文章内容：</div>
-                    <Input className="article-article-input" placeholder="content" value={articleRes ? articleRes.content : ""} onChange={(e) => handleTextChange(e, "content")} />
                 </div>
+                <Markdown content={articleRes ? articleRes.content : ""} setContent={setContent}/>
                 <div className="article-article-button-wrap">
                     <Button className="article-article-button" onClick={onClickBack}>返回</Button>
                     <Button className="article-article-button" onClick={onClickSave} type="primary">保存</Button>
