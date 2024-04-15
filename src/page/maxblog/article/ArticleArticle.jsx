@@ -160,7 +160,7 @@ const ArticleArticle = () => {
     const [modal, contextHolderModal] = Modal.useModal()
     const showBackModal = () => {
         modal.confirm({
-            title: "返回确认",
+            title: "确认返回？",
             icon: <ExclamationCircleOutlined />,
             content: (
                 <>
