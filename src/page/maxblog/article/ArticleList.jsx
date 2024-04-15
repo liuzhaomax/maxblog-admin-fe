@@ -7,6 +7,7 @@ import { getArticleList } from "./handlers"
 import config from "../../../config/config"
 import { URL } from "../../../config/url"
 import { useNavigate } from "react-router-dom"
+import MarkdownIt from "markdown-it"
 
 const IconText = ({ icon, text }) => (
     <Space>
@@ -40,6 +41,7 @@ function ArticleList() {
                 console.log(err)
             })
     }
+    const mdParser = new MarkdownIt({ html: true })
     const mapArticleListRes2Data = articleListRes => {
         let article
         let data = articleListRes.map(item => {
@@ -47,7 +49,7 @@ function ArticleList() {
                 id: item.id,
                 title: item.title,
                 tags: "",
-                preview: item.content.slice(0, 50) + " ...", // 前50个字符
+                preview: mdParser.render(item.content.slice(0, 150) + " ..."), // 前150个字符
                 view: item.view,
                 like: item.like,
                 updatedAt: item.updatedAt.slice(0, 19), // 2024-10-05 15:12:11
@@ -122,7 +124,7 @@ function ArticleList() {
                             title={<div className="article-list-title" onClick={() => onClickListTitle(item.id)} >{item.title}</div>}
                             description={item.tags}
                         />
-                        {item.preview}
+                        <div dangerouslySetInnerHTML={{ __html: item.preview }}></div>
                     </List.Item>
                 )}
             />
