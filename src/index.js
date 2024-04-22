@@ -6,14 +6,14 @@ import { Provider } from "react-redux"
 import { _STORE } from "./state/store"
 import initAxios from "./config/axios"
 
-// https upgrading config
-if (process.env.NODE_ENV === "production") {
-    const head = document.getElementsByTagName("head")[0]
-    const https = document.createElement("meta")
-    https.setAttribute("http-equiv", "Content-Security-Policy")
-    https.setAttribute("content", "upgrade-insecure-requests")
-    head.appendChild(https)
-}
+// https upgrading config 等明年能申免费的SSL再开吧
+// if (process.env.NODE_ENV === "production") {
+//     const head = document.getElementsByTagName("head")[0]
+//     const https = document.createElement("meta")
+//     https.setAttribute("http-equiv", "Content-Security-Policy")
+//     https.setAttribute("content", "upgrade-insecure-requests")
+//     head.appendChild(https)
+// }
 
 // init axios
 initAxios()
