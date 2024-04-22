@@ -4,6 +4,8 @@ import short from "short-uuid"
 
 export const getPuk = () => {
     axios.defaults.headers.common["Request_id"] = short().new()
+    console.log(axios.defaults.baseURL)
+    console.log(axios.defaults.headers)
     return axios.get(URL.INNER.Login)
 }
 
