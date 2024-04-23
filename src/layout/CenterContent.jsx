@@ -25,7 +25,8 @@ function CenterContent() {
                     return names
                 }
             }
-            if (location.pathname === modules[k].FULL_PATH) {
+            if (location.pathname === modules[k].FULL_PATH
+                || location.pathname === modules[k].FULL_PATH + "/") {
                 return [modules[k].NAME]
             }
         }
