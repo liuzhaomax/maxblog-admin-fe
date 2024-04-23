@@ -1,3 +1,10 @@
-#HOME {
+.HOME {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
 
+.HOME a {
+    color: #338e6c;
 }
