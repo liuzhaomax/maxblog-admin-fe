@@ -24,7 +24,7 @@ const ArticleArticle = () => {
 
     const [articleRes, setArticleRes] = useState(
         {
-            "id": "",
+            "id": short().new(),
             "createdAt": "",
             "updatedAt": "",
             "deletedAt": "",
@@ -48,9 +48,6 @@ const ArticleArticle = () => {
         const pathArr = path.split("/")
         const pageName = pathArr[pathArr.length - 1]
         if (pageName === ARTICLE.FUNCTIONS.ARTICLE_LIST.FUNCTIONS.CREATE_ARTICLE.PATH) {
-            let data = articleRes
-            data.id = short().new()
-            setArticleRes(data)
             return
         }
         // 更新页逻辑
@@ -295,7 +292,7 @@ const ArticleArticle = () => {
                 <div className="article-article-input-wrap">
                     <div className="article-article-input-header">文章内容：</div>
                 </div>
-                <Markdown content={articleRes ? articleRes.content : ""} setContent={setContent}/>
+                <Markdown content={articleRes ? articleRes.content : ""} setContent={setContent} articleId={articleRes ? articleRes.id : ""}/>
                 <div className="article-article-button-wrap">
                     <Button className="article-article-button" onClick={onClickBack}>返回</Button>
                     <Button className="article-article-button" onClick={onClickSave} type="primary">保存</Button>

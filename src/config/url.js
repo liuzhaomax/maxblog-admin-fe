@@ -10,6 +10,7 @@ export const URL = {
         ArticleTags: "/maxblog/article/tags",
         ArticleArticle: "/maxblog/article/article",
         UploadCoverImage: "/maxblog/article/article/cover/upload",
+        UploadContentFile: "/maxblog/article/article/content/upload",
         ArticleTag: "/maxblog/article/tag",
         Demo: "/maxblog/demo",
     },
