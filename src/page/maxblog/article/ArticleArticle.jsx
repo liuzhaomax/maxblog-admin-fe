@@ -9,6 +9,7 @@ import { deepCopy } from "../../../utils/deepCopy"
 import config from "../../../config/config"
 import { URL } from "../../../config/url"
 import Markdown from "./Markdown"
+import short from "short-uuid"
 
 const getBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -47,6 +48,9 @@ const ArticleArticle = () => {
         const pathArr = path.split("/")
         const pageName = pathArr[pathArr.length - 1]
         if (pageName === ARTICLE.FUNCTIONS.ARTICLE_LIST.FUNCTIONS.CREATE_ARTICLE.PATH) {
+            let data = articleRes
+            data.id = short().new()
+            setArticleRes(data)
             return
         }
         // 更新页逻辑
