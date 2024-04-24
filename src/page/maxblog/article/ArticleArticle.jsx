@@ -29,7 +29,7 @@ const ArticleArticle = () => {
             "updatedAt": "",
             "deletedAt": "",
             "title": "",
-            "author": "",
+            "author": "马克西",
             "reference": "",
             "link": "",
             "view": 0,
