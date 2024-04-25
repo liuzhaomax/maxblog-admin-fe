@@ -5,6 +5,8 @@ const history = require("connect-history-api-fallback")
 const favicon = require("serve-favicon")
 const logger = require("morgan")
 const debug = require("debug")("my-application")
+const promClient = require("prom-client")
+const Consul = require("consul")
 
 const app = express()
 app.disable("x-powered-by")
@@ -30,9 +32,60 @@ router.get("/", (req, res, next) => {
     res.render("./build/index.html")
 })
 
+const httpRequestDurationMicroseconds = new promClient.Histogram({
+    name: "http_request_duration_seconds",
+    help: "Duration of HTTP requests in seconds",
+    labelNames: ["method", "route", "code"],
+    buckets: [0.1, 0.5, 1, 1.5, 2, 3, 5, 10],
+})
+const promMw = (req, res, next) => {
+    const start = Date.now()
+    res.on("finish", () => {
+        const duration = Date.now() - start
+        httpRequestDurationMicroseconds
+            .labels(req.method, req.route.path, res.statusCode)
+            .observe(duration / 1000)
+    })
+    next()
+}
+router.get("/metrics", (req, res) => {
+    res.set("Content-Type", promClient.register.contentType)
+    res.end(promClient.register.metrics())
+})
+
+app.use(promMw)
+
 app.use("/", router)
 
-app.listen(9602, (req, res) => {
-    console.log("Server fe的be running on 9602.")
+const consulHost = "172.16.96.97"
+const consulPort = 8500
+const consul = new Consul({
+    host: consulHost,
+    port: consulPort,
+})
+const serviceName = "maxblog-admin-fe"
+const serviceHost = "172.16.96.98"
+const servicePort = 9602
+const healthCheckEndpoint = "/health"
+
+consul.agent.service.register({
+    name: serviceName,
+    port: servicePort,
+    check: {
+        http: `http://${serviceHost}:${servicePort}${healthCheckEndpoint}`, // 健康检查的 URL
+        interval: "10s", // 健康检查的间隔时间
+        timeout: "5s",   // 健康检查的超时时间
+        deregister_critical_service_after: "1m" // 在服务不健康时，多久后将其从 Consul 注销
+    }
+}, (err) => {
+    if (err) {
+        console.error("Failed to register with Consul:", err)
+    } else {
+        console.log("Registered with Consul")
+    }
+})
+
+app.listen(servicePort, (req, res) => {
+    console.log(`Server fe的be running on ${servicePort}.`)
     debug()
 })
