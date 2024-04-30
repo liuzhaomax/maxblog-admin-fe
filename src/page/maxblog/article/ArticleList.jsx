@@ -152,8 +152,9 @@ function ArticleList() {
                         setPageNo(pageNo)
                         setPageSize(pageSize)
                     },
+                    current: pageNo,
                     pageSize: pageSize,
-                    pageSizeOptions: ["5", "10", "20", "30"],
+                    pageSizeOptions: [5, 10, 20, 30],
                     showQuickJumper: true,
                     showSizeChanger: true,
                     locale: {
