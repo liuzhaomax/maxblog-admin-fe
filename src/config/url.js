@@ -12,6 +12,7 @@ export const URL = {
         UploadCoverImage: "/maxblog/article/article/cover/upload",
         UploadContentFile: "/maxblog/article/article/content/upload",
         ArticleTag: "/maxblog/article/tag",
+        StatsArticleMain: "/maxblog/stats/article/main",
         Demo: "/maxblog/demo",
     },
     OUTER: {

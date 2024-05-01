@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react"
 import "./ArticleList.css"
 import { ARTICLE } from "../../../config/module"
-import { Button, List, Space, Input, Modal } from "antd"
+import { Button, Input, List, Modal, Space } from "antd"
 import {
-    LikeOutlined,
-    EyeOutlined,
     ClockCircleOutlined,
     DeleteOutlined,
     ExclamationCircleOutlined,
+    EyeOutlined,
+    LikeOutlined,
 } from "@ant-design/icons"
-import { deleteArticleArticle, getArticleList } from "./handlers"
+import { deleteArticleArticle, getArticleList, getStatsArticleMain } from "./handlers"
 import config from "../../../config/config"
 import { URL } from "../../../config/url"
 import { useNavigate } from "react-router-dom"
@@ -37,14 +37,20 @@ function ArticleList() {
     }
 
     // 获取文章列表
-    const [pageNo, setPageNo] = useState(1)
-    const [pageSize, setPageSize] = useState(5)
+    const queryString = window.location.search
+    const params = new URLSearchParams(queryString)
+    const pageNoParam = params.get("pageNo") ? params.get("pageNo") : 1
+    const pageSizeParam = params.get("pageSize") ? params.get("pageSize") : 5
+    const [pageNo, setPageNo] = useState(pageNoParam)
+    const [pageSize, setPageSize] = useState(pageSizeParam)
+    const [statsArticleMain, setStatsArticleMain] = useState(null)
     const [articleListRes, setArticleListRes] = useState([]) // list data
 
     useEffect(() => {
         loadArticleList()
-    }, [searchingStr])
+    }, [statsArticleMain, pageNo, pageSize])
     const loadArticleList = () => {
+        setArticleListRes([]) // 让填充的占位数据消失
         let params = {
             pageNo: pageNo,
             pageSize: pageSize,
@@ -53,7 +59,20 @@ function ArticleList() {
         }
         getArticleList(params)
             .then(res => {
-                mapArticleListRes2Data(res.data.data)
+                let data = mapArticleListRes2Data(res.data.data)
+                extendArticleList(data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+    useEffect(() => {
+        loadStatsArticleMain()
+    }, [])
+    const loadStatsArticleMain = () => {
+        getStatsArticleMain()
+            .then(res => {
+                setStatsArticleMain(res.data.data)
             })
             .catch(err => {
                 console.log(err)
@@ -62,7 +81,7 @@ function ArticleList() {
     const mdParser = new MarkdownIt({ html: true })
     const mapArticleListRes2Data = articleListRes => {
         let article
-        let data = articleListRes.map(item => {
+        return articleListRes.map(item => {
             article = {
                 id: item.id,
                 title: item.title,
@@ -84,6 +103,21 @@ function ArticleList() {
             article.tags = tagNameStr
             return article
         })
+    }
+    // 获取文章数量，以便补充数据数组，从而让pagination有很多页
+    const extendArticleList = (articleList) => {
+        let data = []
+        if (statsArticleMain) {
+            for (let i = 0; i < Math.ceil(statsArticleMain.quantity / pageSize); i++) {
+                if (pageNo - 1 === i) {
+                    data = [...data, ...articleList]
+                } else {
+                    for (let j = 0; j < pageSize; j++) {
+                        data.push({id: j+""})
+                    }
+                }
+            }
+        }
         setArticleListRes(data)
     }
 

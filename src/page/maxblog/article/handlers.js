@@ -50,3 +50,8 @@ export const deleteArticleArticle = (id) => {
     axios.defaults.headers.common["Request_id"] = short().new()
     return axios.delete(URL.INNER.ArticleArticle + `?articleId=${id}`)
 }
+
+export const getStatsArticleMain = () => {
+    axios.defaults.headers.common["Request_id"] = short().new()
+    return axios.get(URL.INNER.StatsArticleMain)
+}
