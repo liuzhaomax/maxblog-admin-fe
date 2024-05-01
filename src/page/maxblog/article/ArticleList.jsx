@@ -33,7 +33,29 @@ function ArticleList() {
     const onSearch = (value) => {
         setSearchLoading(true)
         setSearchingStr(value)
+        reloadArticleList(value)
         setSearchLoading(false)
+    }
+    // 重新加载文章列表，用于search功能
+    const reloadArticleList = (searchingStr) => {
+        let params = {
+            pageNo: pageNo,
+            pageSize: pageSize,
+            tagName: "",
+            search: searchingStr ? searchingStr : "",
+        }
+        getArticleList(params)
+            .then(res => {
+                let data = mapArticleListRes2Data(res.data.data)
+                if (searchingStr.length) {
+                    setArticleListRes(data)
+                } else {
+                    extendArticleList(data)
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     // 获取文章列表
