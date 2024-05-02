@@ -9,7 +9,6 @@ import { deepCopy } from "../../../utils/deepCopy"
 import config from "../../../config/config"
 import { URL } from "../../../config/url"
 import Markdown from "./Markdown"
-import short from "short-uuid"
 
 const getBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -21,10 +20,13 @@ const getBase64 = (file) =>
 
 const ArticleArticle = () => {
     const navigate = useNavigate()
+    const queryString = window.location.search
+    const params = new URLSearchParams(queryString)
+    const articleId = params.get("articleId")
 
     const [articleRes, setArticleRes] = useState(
         {
-            "id": short().new(),
+            "id": articleId,
             "createdAt": "",
             "updatedAt": "",
             "deletedAt": "",
